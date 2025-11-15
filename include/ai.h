@@ -5,6 +5,7 @@
 
 class AI{
     private:
+    bool isWin(std::array<char, 9> state);
     bool isValid(std::array<char, 9> state);
     std::vector<std::array<char, 9>> generateAllStates();
 };
