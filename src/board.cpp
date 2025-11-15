@@ -3,22 +3,26 @@
 
 
 Board::Board(){
-    gameBoard[3][3] = {
-        {'-', '-', '-'},
-        {'-', '-', '-'},
-        {'-', '-', '-'}
-    };
+    gameBoard= {'-', '-', '-',
+        '-', '-', '-',
+        '-', '-', '-'};
 }
 
-void makeMove(int rowIndex, int colIndex, char character){
-    gameBoard[rowIndex][colIndex] = character;
+void Board::makeMove(int index, char character){
+    gameBoard[index] = character;
 }
 
-void printBoard(){
-    for(int i=0; i < 3; i++){
-        for (int j=0; j<3; j++){
-            std::cout << gameBoard[i][j];
+void Board::printBoard(){
+    for (int i = 0; i < 9; i++){
+        std::cout << gameBoard[i] << " ";
+        if(i % 3 == 0){
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
     }
+}
+
+Board::Board() {
+    gameBoard = {'-', '-', '-',
+                 '-', '-', '-',
+                 '-', '-', '-'};
 }

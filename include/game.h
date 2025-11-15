@@ -1,9 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
+#include "board.h"
 
 
-class Game(){
-
+class Game{
+    
+    
     private:
     int turn=0; // 0 represents that it's the players turn, 1 represents it's the AIs turn.
     Board board;
@@ -11,8 +13,7 @@ class Game(){
     public:
     Game();
 
-    void runGame()
+    void runGame();
 
-}
-
+};
 #endif

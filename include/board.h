@@ -5,11 +5,11 @@ class Board{
 
     public:
     Board();
-    char gameBoard[3][3];
+    std::array<char, 9> gameBoard;
     
 
-    void makeMove(int rowIndex, int colIndex, char character);
-    void printBoard() const;
+    void makeMove(int index, char character);
+    void printBoard();
 };
 
 #endif
