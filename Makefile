@@ -129,6 +129,30 @@ TicTacToe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/build
 .PHONY : TicTacToe/fast
 
+src/ai.o: src/ai.cpp.o
+.PHONY : src/ai.o
+
+# target to build an object file
+src/ai.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/src/ai.cpp.o
+.PHONY : src/ai.cpp.o
+
+src/ai.i: src/ai.cpp.i
+.PHONY : src/ai.i
+
+# target to preprocess a source file
+src/ai.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/src/ai.cpp.i
+.PHONY : src/ai.cpp.i
+
+src/ai.s: src/ai.cpp.s
+.PHONY : src/ai.s
+
+# target to generate assembly for a file
+src/ai.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TicTacToe.dir/build.make CMakeFiles/TicTacToe.dir/src/ai.cpp.s
+.PHONY : src/ai.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... TicTacToe"
+	@echo "... src/ai.o"
+	@echo "... src/ai.i"
+	@echo "... src/ai.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

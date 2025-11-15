@@ -97,13 +97,7 @@ void AI::generateAllStatesHelper(std::array<char, 9>& board, std::vector<std::ar
         for(int i=0; i < 9; i++){
             if(board[i] == '_'){
                 board[i] = currentMove;
-                if(currentMove == 'x'){
-                    currentMove = 'o';
-                }
-                else{
-                    currentMove = 'x';
-                }
-
+                char nextMove = (currentMove == 'x' ? 'o' : 'x');
                 generateAllStatesHelper(board, states, currentMove);
                 board[i] = '_';
             }

@@ -1,7 +1,8 @@
-#include "ai.h"
 #include <vector>
 #include <array>
 #include <iostream>
+
+#include "ai.h"
 
 int main(){
 
@@ -9,7 +10,7 @@ int main(){
 
     std::vector<std::array<char, 9>> states = ai.generateAllStates();
 
-    std::cout << states.size();
+    std::cout << states.size() << std::endl;
 
 
 }

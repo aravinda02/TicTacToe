@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/TicTacToe.dir/src/ai.cpp.o"
+  "CMakeFiles/TicTacToe.dir/src/ai.cpp.o.d"
   "CMakeFiles/TicTacToe.dir/src/main.cpp.o"
   "CMakeFiles/TicTacToe.dir/src/main.cpp.o.d"
   "TicTacToe"

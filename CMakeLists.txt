@@ -6,5 +6,6 @@ include_directories(include)
 
 add_executable(TicTacToe
     src/main.cpp
+    src/ai.cpp
 )
 
