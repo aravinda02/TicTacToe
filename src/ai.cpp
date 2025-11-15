@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
+#include <cmath>
 #include "ai.h"
+
 
 AI::AI(){
 
 }
 
-bool isWin(std::array<char, 9> state){
+bool AI::isWin(std::array<char, 9> state){
     bool result = false;
 
     if((state[0] == state[3] && state[3] == state[6] && state[0] != '_')|| \
@@ -37,7 +39,7 @@ bool isWin(std::array<char, 9> state){
             else
             {
                 result = true;
-            }
+            };
 
         } //horizontal win
 
@@ -54,14 +56,62 @@ bool isWin(std::array<char, 9> state){
                 result = true;
             }
 
-        } //diagonal win
+        }; //diagonal win
     
         return result;
 
-    }
+}
 
-bool isValid(std::array<char, 9> state){
+bool AI::isValid(std::array<char, 9> state){
     return isWin(state);
     
 
 }
+
+
+std::vector<std::array<char, 9>> AI::generateAllStates(){
+    std::array<char, 9> board = {'_', '_', '_',
+        '_', '_', '_',
+        '_', '_', '_'};
+    std::vector<std::array<char, 9>> states;
+    char currentMove = 'x';
+
+    generateAllStatesHelper(board, states, currentMove);
+    return states;
+}
+void AI::generateAllStatesHelper(std::array<char, 9>& board, std::vector<std::array<char, 9>>& states,\
+     char currentMove)
+    {
+        bool full = true;
+        for(char c: board){
+            if (c == '_'){
+                full = false;
+                break;
+            }
+        }
+        if(full){
+            states.push_back(board);
+            return;
+        }
+
+        for(int i=0; i < 9; i++){
+            if(board[i] == '_'){
+                board[i] = currentMove;
+                if(currentMove == 'x'){
+                    currentMove = 'o';
+                }
+                else{
+                    currentMove = 'x';
+                }
+
+                generateAllStatesHelper(board, states, currentMove);
+                board[i] = '_';
+            }
+
+        }
+
+
+
+};
+
+
