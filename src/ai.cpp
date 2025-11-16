@@ -101,6 +101,7 @@ void AI::generateAllStatesHelper(std::array<char, 9>& board, std::set<std::array
 }
 
 
+
 //public fns
 
 std::set<std::array<char, 9>> AI::generateAllStates(){
@@ -153,4 +154,51 @@ int AI::countWins(const std::array<char,9>& s) {
     if (s[2] == s[4] && s[4] == s[6] && s[2] != '_') wins++;
 
     return wins;
+}
+
+std::vector<std::tuple<std::array<char, 9>, int, int>> fillQtable(const std::set<std::array<char, 9>> states){
+    std::vector<std::tuple<std::array<char, 9>, int, int>> qTable;
+    for(std::array<char, 9> s: states){
+
+    }
+
+}
+
+char AI::fillQtableHelper(std::array<char, 9>& board, char currentMove)
+{   
+    if (isWin(board)) {
+        char winner = whoWins(board);
+        return winner;
+    }
+    else if (std::find(board.begin(), board.end(), '_') == board.end()){
+        return '_';
+    }
+
+    for (int i = 0; i < 9; i++) {
+        if (board[i] == '_') {
+            board[i] = currentMove;
+            char nextMove = (currentMove == 'x' ? 'o' : 'x');
+            fillQtableHelper(board, nextMove);
+            board[i] = '_';
+        }
+    }
+}
+
+char AI::whoWins(const std::array<char, 9>& s){
+    int countX=0, countO = 0;
+
+    for(char c : s){
+        if (c == 'x'){
+            countX += 1;
+        }
+        if (c == 'o'){
+            countO += 1;
+        }
+    }
+    if (countX == (countO +1) ){
+        return 'x';
+    }
+    else{
+        return 'o';
+    }
 }
