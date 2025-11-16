@@ -161,12 +161,14 @@ std::pair<std::vector<std::tuple<std::array<char, 9>, int, int>>,
 AI::fillQtable(const std::set<std::array<char, 9>>& states) {
     qTableX.clear();
     qTableO.clear();
-    for (const std::array<char, 9>& state : states) {
-        char currentMove = whoMoves(state);  
+    for (const std::array<char, 9>& s : states) {
+        std::array<char, 9> board = s;   // ← make a copy you can modify GEN AI GENERATED
+        
+        char currentMove = whoMoves(s);  
         std::vector<int> possibleValuesX;
         std::vector<int> possibleValuesO;
         std::vector<int> actions;
-        fillQtableHelper(state, currentMove, possibleValuesX, possibleValuesO, actions);
+        fillQtableHelper(board, currentMove, possibleValuesX, possibleValuesO, actions);
 
         for (size_t i = 0; i < actions.size(); i++) {
             int action = actions[i]; 
@@ -174,9 +176,9 @@ AI::fillQtable(const std::set<std::array<char, 9>>& states) {
             int rewardO = possibleValuesO[i];  
 
             if (currentMove == 'x') {
-                qTableX.push_back(std::make_tuple(state, action, rewardX));
+                qTableX.push_back(std::make_tuple(s, action, rewardX));
             } else {
-                qTableO.push_back(std::make_tuple(state, action, rewardO));
+                qTableO.push_back(std::make_tuple(s, action, rewardO));
             }
         }
     }
