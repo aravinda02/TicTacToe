@@ -55,6 +55,6 @@ int main(){
     std::pair<std::vector<std::tuple<std::array<char, 9>, int, int>>,
           std::vector<std::tuple<std::array<char, 9>, int, int>>> qTables = ai.fillQtable(states);
 
-    std::cout<< "Qtables: " ;
+    std::cout << qTables<<
 
 }
