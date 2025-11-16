@@ -156,33 +156,69 @@ int AI::countWins(const std::array<char,9>& s) {
     return wins;
 }
 
-std::vector<std::tuple<std::array<char, 9>, int, int>> fillQtable(const std::set<std::array<char, 9>> states){
-    std::vector<std::tuple<std::array<char, 9>, int, int>> qTable;
-    for(std::array<char, 9> s: states){
+std::pair<std::vector<std::tuple<std::array<char, 9>, int, int>>,
+          std::vector<std::tuple<std::array<char, 9>, int, int>>> 
+AI::fillQtable(const std::set<std::array<char, 9>>& states) {
+    qTableX.clear();
+    qTableO.clear();
+    for (const std::array<char, 9>& state : states) {
+        char currentMove = whoMoves(state);  
+        std::vector<int> possibleValuesX;
+        std::vector<int> possibleValuesO;
+        std::vector<int> actions;
+        fillQtableHelper(state, currentMove, possibleValuesX, possibleValuesO, actions);
 
+        for (size_t i = 0; i < actions.size(); i++) {
+            int action = actions[i]; 
+            int rewardX = possibleValuesX[i];  
+            int rewardO = possibleValuesO[i];  
+
+            if (currentMove == 'x') {
+                qTableX.push_back(std::make_tuple(state, action, rewardX));
+            } else {
+                qTableO.push_back(std::make_tuple(state, action, rewardO));
+            }
+        }
     }
 
+
+
+    return {qTableX, qTableO};
 }
 
-char AI::fillQtableHelper(std::array<char, 9>& board, char currentMove)
-{   
+
+
+void AI::fillQtableHelper(std::array<char, 9>& board, char currentMove,
+                          std::vector<int>& possibleValuesX, std::vector<int>& possibleValuesO,
+                          std::vector<int>& actions) {
     if (isWin(board)) {
         char winner = whoWins(board);
-        return winner;
-    }
-    else if (std::find(board.begin(), board.end(), '_') == board.end()){
-        return '_';
-    }
-
-    for (int i = 0; i < 9; i++) {
-        if (board[i] == '_') {
-            board[i] = currentMove;
-            char nextMove = (currentMove == 'x' ? 'o' : 'x');
-            fillQtableHelper(board, nextMove);
-            board[i] = '_';
+        if (currentMove == winner && winner == 'x') {
+            possibleValuesX.push_back(1);
+            possibleValuesO.push_back(-1);
+        } else if (currentMove == winner && winner == 'o') {
+            possibleValuesX.push_back(-1);
+            possibleValuesO.push_back(1);
+        } else {
+            possibleValuesX.push_back(-1);
+            possibleValuesO.push_back(1);
+        }
+    } else if (std::find(board.begin(), board.end(), '_') == board.end()) {
+        possibleValuesX.push_back(0);
+        possibleValuesO.push_back(0);
+    } else {
+        for (int i = 0; i < 9; i++) {
+            if (board[i] == '_') {
+                board[i] = currentMove;
+                char nextMove = (currentMove == 'x' ? 'o' : 'x');
+                actions.push_back(i);
+                fillQtableHelper(board, nextMove, possibleValuesX, possibleValuesO, actions);
+                board[i] = '_';
+            }
         }
     }
 }
+
 
 char AI::whoWins(const std::array<char, 9>& s){
     int countX=0, countO = 0;
@@ -202,3 +238,23 @@ char AI::whoWins(const std::array<char, 9>& s){
         return 'o';
     }
 }
+
+char AI::whoMoves(const std::array<char, 9>& s){
+    int countX=0, countO = 0;
+
+    for(char c : s){
+        if (c == 'x'){
+            countX += 1;
+        }
+        if (c == 'o'){
+            countO += 1;
+        }
+    }
+    if (countX == (countO +1) ){
+        return 'o';
+    }
+    else{
+        return 'x';
+    }
+}
+

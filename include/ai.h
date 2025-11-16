@@ -12,10 +12,18 @@ class AI{
     void generateAllStatesHelper(std::array<char, 9>& board, std::set<std::array<char, 9>>& states, char currentMove) ;
     bool isValidState(const std::array<char, 9> s);
     bool isValidCount(std::array<char, 9> s);
-    void AI::fillQtableHelper(std::array<char, 9>& board, std::set<std::array<char, 9>>& states, char currentMove);
+    void fillQtableHelper
+    (
+        std::array<char, 9>& board,
+        char currentMove, 
+        std::vector<int> possibleValuesX,
+        std::vector<int>& possibleValuesO,
+        std::vector<int> actions
+    );
     char whoWins(const std::array<char, 9>& s);
 
-    std::vector<std::tuple<std::array<char, 9>, int, int>> qTable;
+    std::vector<std::tuple<std::array<char, 9>, int, int>> qTableX;
+    std::vector<std::tuple<std::array<char, 9>, int, int>> qTableO;
 
     
     
@@ -27,6 +35,7 @@ class AI{
     std::set<std::array<char, 9>> generateAllStates();
 
     std::vector<std::tuple<std::array<char, 9>, int, int>> fillQtable(const std::set<std::array<char, 9>>);
+    char whoMoves(const std::array<char, 9>& s);
 };
 
 
