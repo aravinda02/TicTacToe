@@ -209,32 +209,17 @@ void AI::fillQtableHelper(std::array<char, 9>& board, char currentMove,
         possibleValuesX.push_back(0);
         possibleValuesO.push_back(0);
     } else {
-        std::vector<int> rewardsX;
-        std::vector<int> rewardsO;
-
         for (int i = 0; i < 9; i++) {
             if (board[i] == '_') {
                 board[i] = currentMove;
                 char nextMove = (currentMove == 'x' ? 'o' : 'x');
-
+                actions.push_back(i);
                 fillQtableHelper(board, nextMove, possibleValuesX, possibleValuesO, actions);
-
                 board[i] = '_';
-                rewardsX.push_back(possibleValuesX.back());
-                rewardsO.push_back(possibleValuesO.back());
             }
-        }
-
-        if (!rewardsX.empty()) {
-            int avgRewardX = std::accumulate(rewardsX.begin(), rewardsX.end(), 0) / rewardsX.size();
-            int avgRewardO = std::accumulate(rewardsO.begin(), rewardsO.end(), 0) / rewardsO.size();
-
-            possibleValuesX.push_back(avgRewardX);
-            possibleValuesO.push_back(avgRewardO);
         }
     }
 }
-
 
 
 char AI::whoWins(const std::array<char, 9>& s){
