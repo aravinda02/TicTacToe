@@ -1,2 +1,4 @@
 # TicTacToe
-A Q-Learning TicTacToe game for my summer research project
+A Q-Learning TicTacToe game [Unfinished]
+
+Current goal: an AI vs AI game to train the Q-Tables.
