@@ -33,6 +33,8 @@ class AI{
     std::pair<std::vector<std::tuple<std::array<char, 9>, int, int>>,
           std::vector<std::tuple<std::array<char, 9>, int, int>>> fillQtable(const std::set<std::array<char, 9>>& states);
     char whoMoves(const std::array<char, 9>& s);
+
+    void printQtable(std::vector<std::tuple<std::array<char, 9>, int, int>> qTable);
 };
 
 
